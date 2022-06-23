@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-5">
+{% for product in liked%}
+<div class="d-flex justify-content-center">
+    <div class="card mb-3" style="width: 700px; height:200px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <a href="{% url 'detail' product.pk %}"><img src="{{product.picture.url}}" style="width:200px; height:200px;" class="img-fluid rounded-start" alt="..."></a>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <a class="text-decoration-none text-dark" href="{% url 'detail' product.pk %}"><h5 class="card-title ">{{product.name}}</h5></a>
+              <button class="border-0 bg-transparent">
+                    <i style="font-size:25px;" class="bi bi-heart-fill"></i>
+              </button>
+            </div>
+            <p class="card-text">{{product.description}}</p>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h5><p class="card-text">${{product.price}}</p></h5>
+              <p class="card-text"><small class="text-muted">{{ product.adress }} | {{ product.created_at|date:'M d, Y' }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock content %}>

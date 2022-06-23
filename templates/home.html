@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--search-->
+<div class="row mt-4 justify-content-md-center">
+    <div class="col-8 mx-5">
+        <form class="d-flex" method="get">
+            <input class="form-control" type="text" placeholder="Qidirish" name="q" value="{{ search_query }}">
+            <button class="btn btn-success">Qidirish</button>
+        </form>
+    </div>
+</div>
+<!--endsearch-->
+
+<!--parts-->
+<div style="background-color:rgb(240, 240, 240);" class="py-3 mb-3">
+    <h2 style="text-align:center;" class="mt-4">Bosh toifalar</h2>
+    <div class="row m-5">
+        {% for category in categorys %}
+            <div class="col" style="text-align:center;">
+                <a href="{% url 'category' category.id %}">
+                    <img style="widht:50px; height:50px; border:black solid 1px; border-radius:50%;" src="{{ category.picture.url }}" alt="">
+                </a><br>
+                <a href="{% url 'category' category.id %}" style="text-decoration:none; color:black;"><h5>{{ category.name }}</h5></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!--endparts-->
+
+<!--main-->
+<div class="mx-5">
+<div class="row row-cols-1 row-cols-md-5 px-5 mx-5 g-4  " >
+    {% for product in products%}
+      <div class="col">
+        <div class="card h-100">
+            <a href="{% url 'detail' product.id %}"><img style="weight:100px; height:150px;" src="{{ product.picture.url }}" class="card-img-top" alt="..."></a>
+          <div class="card-body">
+           <div class="d-flex justify-content-between">
+                <h6 class="card-title">
+                    <a style="text-decoration:none; color:black;" href="{% url 'detail' product.id  %}">
+                        {{ product.name| truncatechars:25 }}
+                    </a>
+                </h6>
+                <button class="border-0 bg-transparent">
+                    <i class="bi bi-heart"></i>
+                </button>
+           </div>
+            <p class="card-text" style="font-size:14px;">{{ product.description | truncatechars:70 }}</p>
+            <h6><i class="bi bi-currency-dollar"></i>{{ product.price}}</h6>
+          </div>
+          <div class="card-footer" style="font-size:12px;">
+            <small class="text-muted">{{ product.adress }} | {{ product.created_at|date:'M d, Y' }}</small>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+</div>
+<!--endmain-->
+
+{% endblock content %}

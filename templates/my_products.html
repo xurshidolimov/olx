@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-5">
+{% for product in products%}
+<div class="d-flex justify-content-center">
+    <div class="card mb-3" style="width: 700px; height:200px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <a href="{% url 'detail' product.pk %}"><img src="{{product.picture.url}}" style="width:200px; height:200px;" class="img-fluid rounded-start" alt="..."></a>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <a class="text-decoration-none text-dark" href="{% url 'detail' product.pk %}"><h5 class="card-title ">{{product.name}}</h5></a>
+            <p class="card-text" style="font-size:14px;">{{product.description}}</p>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h5><p class="card-text">${{product.price}}</p></h5>
+              <p class="card-text"><small class="text-muted">{{ product.adress }} | {{ product.created_at|date:'M d, Y' }}</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="m-3">
+            <a class="text-decoration-none text-dark" href="#">
+              <i style="font-size:30px;" class="bi bi-heart"></i>
+            </a>
+          </div>
+          <div class="m-3">
+            <a class="text-decoration-none text-success" href="{% url 'update' product.pk %}">
+              <i style="font-size:30px;" class="bi bi-pen-fill"></i>
+            </a>
+          </div>
+          <div class="m-3">
+            <a class="text-decoration-none text-danger" href="{% url 'delete' product.pk %}">
+              <i style="font-size:30px;" class="bi bi-trash3-fill"></i>
+            </a>
+          </div>
+          <div class="m-3">
+            <a class="text-decoration-none text-dark" href="{% url 'activ' product.id %}">
+              {% if not product.active %}
+                  <i style="font-size:30px;" class="bi bi-hand-thumbs-down"></i>
+              {% else %}
+                  <i style="font-size:30px;" class="bi bi-hand-thumbs-up"></i>
+              {% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock content %}>

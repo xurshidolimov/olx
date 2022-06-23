@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div style="text-align:center;">
+    <h4>Postni o'chirish</h4>
+    <form action="" method="post">{% csrf_token %}
+        {{ form | crispy}}
+        <p> Postni rostdan ham o'chirmoqchimisiz?</p>
+        <input class="btn btn-danger" type="submit" value="Ha o'chiraman">
+    </form>
+</div>
+{% endblock content %}
